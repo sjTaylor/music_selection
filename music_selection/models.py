@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Instrumentation(models.Model):
@@ -25,12 +26,11 @@ class Section(models.Model):
         return self.section_name
 
 
-class User(models.Model):
-    user_name = models.SlugField(max_length=20, unique=True)
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+class User(AbstractUser):
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.user_name + " (" + str(self.section) + ")"
+        return self.username + " (" + str(self.section) + ")"
 
 
 class VerdictType(models.Model):
