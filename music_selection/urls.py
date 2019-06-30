@@ -19,5 +19,6 @@ import music_selection.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', views.index)
+    path('', views.index, name='homepage'),
+    path('concerts/', views.concert_list, name='concert_list'),
 ]

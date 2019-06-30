@@ -1,21 +1,40 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from urllib.parse import urlparse, parse_qs
 
 
 class Instrumentation(models.Model):
     instrumentation = models.CharField(max_length=200, unique=True)
 
+    def __str__(self):
+        return self.instrumentation
+
 
 class SongSuggestion(models.Model):
 
+    link = models.CharField(max_length=400)
     song_name = models.CharField(max_length=40)
     composer = models.CharField(max_length=400)
     series = models.CharField(max_length=40)
     instrumentation = models.ForeignKey(Instrumentation, on_delete=models.CASCADE)
-    link = models.CharField(max_length=400)
     medley_song_links = models.CharField(max_length=4000)
     sheet_music_link = models.CharField(max_length=400)
-    suggestion_time = models.DateField(verbose_name="Most recent date song was suggested")
+
+    def __str__(self):
+        return '%s FROM %s BY %s' % (self.song_name, self.series, self.composer)
+
+    def is_youtube_link(self):
+        return 'youtube.com' in self.link or '//youtu.be' in self.link
+
+    def get_youtube_id(self):
+        if self.is_youtube_link():
+            parsed_link = urlparse(self.link)
+            if 'youtube.com' in self.link:
+                return parse_qs(parsed_link.query)['v']
+            else:
+                return parsed_link.path[1:]
+        else:
+            return None
 
 
 class Section(models.Model):
@@ -41,7 +60,6 @@ class VerdictType(models.Model):
         ("N/A", "N/A"),
     ]
     decision = models.CharField(max_length=10, choices=VERDICT_CHOICES, unique=True)
-    # ranking = models.IntegerField(verbose_name="A rating of how positive the verdict is?")
 
     def __str__(self):
         return self.decision
@@ -67,6 +85,15 @@ class SongJudgement(models.Model):
     song = models.ForeignKey(SongSuggestion, on_delete=models.CASCADE)
 
 
+class Concert(models.Model):
+    year = models.IntegerField()
+    concert_label = models.SlugField(verbose_name="Label for concert (e.g. fall, a-fest, fall-electronics, etc.)",
+                                     max_length=50)
+
+    def __str__(self):
+        return '%d: %s' % (self.year, self.concert_label)
+
+
 class SuggestionDecision(models.Model):
     DECISION_TYPES = [
         ("PUNT", "Delay Decision"),
@@ -75,13 +102,8 @@ class SuggestionDecision(models.Model):
         ("REJECT", "Reject"),
         ("UNK", "In Progress")
     ]
-    SEMESTER_TYPES = [
-        ("F", "Fall"),
-        ("S", "Spring")
-    ]
-    decision = models.CharField(max_length=10, choices=DECISION_TYPES)
-    semester = models.CharField(max_length=10, choices=SEMESTER_TYPES)
-    year = models.IntegerField()
-    comments = models.CharField(max_length=1000)
+    concert = models.ForeignKey(Concert, on_delete=models.CASCADE)
     suggestion = models.ForeignKey(SongSuggestion, on_delete=models.CASCADE)
+    decision = models.CharField(max_length=10, choices=DECISION_TYPES, default="UNK")
+    comments = models.CharField(max_length=1000, default='')
 

@@ -20,6 +20,7 @@ h1, h2, h3
 	margin: 0;
 	padding: 0;
 	font-weight: 600;
+    font-size: 2.5em;
 	color: #454445;
 }
 
@@ -296,6 +297,16 @@ ul.contact li a.icon-tumblr:before
 ul.contact li a.icon-rss:before
 {
 	background: #F2600B;
+}
+
+a.link-box {
+    background-color: black;
+    color: gray;
+    padding: 24px 35px;
+    font-size: 4em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
 /*********************************************************************************/
