@@ -54,9 +54,9 @@ class User(AbstractUser):
 
 class VerdictType(models.Model):
     VERDICT_CHOICES = [
-        ("YES", "Yes"),
-        ("MAYBE", "Maybe"),
-        ("NO", "No"),
+        ("Yes", "Yes"),
+        ("Maybe", "Maybe"),
+        ("No", "No"),
         ("N/A", "N/A"),
     ]
     decision = models.CharField(max_length=10, choices=VERDICT_CHOICES, unique=True)
@@ -96,14 +96,14 @@ class Concert(models.Model):
 
 class SuggestionDecision(models.Model):
     DECISION_TYPES = [
-        ("PUNT", "Delay Decision"),
-        ("NEXT", "Next Semester"),
-        ("ACCEPT", "Accept"),
-        ("REJECT", "Reject"),
-        ("UNK", "In Progress")
+        ("Delay Decision", "Delay Decision"),
+        ("Next Semester", "Next Semester"),
+        ("Accept", "Accept"),
+        ("Reject", "Reject"),
+        ("In Progress", "In Progress"),
     ]
     concert = models.ForeignKey(Concert, on_delete=models.CASCADE)
     suggestion = models.ForeignKey(SongSuggestion, on_delete=models.CASCADE)
-    decision = models.CharField(max_length=10, choices=DECISION_TYPES, default="UNK")
+    decision = models.CharField(max_length=20, choices=DECISION_TYPES, default="In Progress")
     comments = models.CharField(max_length=1000, default='')
 
