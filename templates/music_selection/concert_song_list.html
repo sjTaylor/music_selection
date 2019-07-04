@@ -1,0 +1,58 @@
+{% extends 'music_selection/untamed/base.html' %}
+
+{% block content %}
+    {% load static %}
+    <style>
+        @import "{% static 'untamed/default.css' %}";
+        @import "{% static 'music_selection/concert_song_list.css' %}";
+    </style>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="{% static 'js/floating-head.js' %}"></script>
+
+    <h1>Suggestion List</h1>
+
+
+    <table class="persist-area">
+    <thead>
+        <tr class="persist-header">
+            <th>Decision</th>
+            <th>Song Name</th>
+            <th>Series</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for decision in decisions %}
+        <tr>
+            <td>
+                <span class="hint--rounded" data-hint="{{ decision.comments }}">{{ decision.decision }}</span>
+            </td>
+            <td>
+                <span class="hint--rounded hint--top" data-hint="{{ decision.suggestion.song_name }}">
+                    {{ decision.suggestion.song_name|truncatechars:"30" }}
+                </span>
+            </td>
+            <td>
+                <span class="hint--rounded" data-hint="{{ decision.suggestion.series }}">{{ decision.suggestion.series|truncatechars:"15" }}</span>
+            </td>
+            <td>
+                {% if decision.suggestion.link|slice:"0:4" == "http" %} {# If link is actually a link #}
+                    <a href="{{ decision.suggestion.link }}">
+                        <span class="hint--rounded" data-hint="{{ decision.suggestion.link }}">
+                            link
+                        </span>
+                    </a>
+                {% else %}
+                    <span class="hint--rounded" data-hint="{{ decision.suggestion.link }}">
+                        None
+                    </span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+    </table>
+
+{% endblock %}

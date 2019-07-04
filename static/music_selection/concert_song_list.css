@@ -1,0 +1,31 @@
+
+tr:nth-child(1), th:nth-child(1) {
+    width: 75px;
+}
+
+tr:nth-child(2), th:nth-child(2) {
+    width: 300px;
+}
+
+tr:nth-child(3), th:nth-child(3) {
+    width: 150px;
+}
+
+tr:nth-child(4), th:nth-child(4) {
+    width: 50px;
+}
+
+/*tr:nth-child(1), th:nth-child(1) {*/
+/*    width: 40px;*/
+/*}*/
+
+/*tr:nth-child(1), th:nth-child(1) {*/
+/*    width: 40px;*/
+/*}*/
+
+/*tr:nth-child(1), th:nth-child(1) {*/
+/*    width: 40px;*/
+/*}*/
+
+
+

@@ -1,0 +1,11 @@
+{% extends 'music_selection/untamed/base.html' %}
+
+{% block content %}
+    <h1>Concert List</h1>
+{% for concert in concerts %}
+    <div>
+    <a href="{% url 'concert_song_list' concert.year concert.concert_label %}" class="link-box">{{ concert.year }}: {{ concert.concert_label }}</a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -34,6 +34,49 @@ span.data-hint {
   transition-delay: 0.8s !important;
 }
 
+.floatingHeader {
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+}
+
+/*#page-wrap {*/
+/*  width: 500px;*/
+/*  margin: 100px auto;*/
+/*}*/
+.spacer {
+  height: 600px;
+}
+table {
+  border-collapse: collapse;
+    font-size: 20px;
+}
+th {
+  background-color: lightgrey;
+  padding: 10px;
+  /*width: 200px;*/
+  text-align: left;
+}
+tr:nth-child(odd) {
+  background: #eee;
+}
+td {
+  padding: 10px;
+  /*width: 200px;*/
+    text-align: left;
+}
+
+.some-other-area {
+  margin: 300px 0;
+  line-height: 2;
+}
+h2 {
+  background: lightgrey;
+  padding: 10px;
+  font: 28px Georgia, Serif;
+  margin: 0 0 20px 0;
+}
+
 
 h1, h2, h3
 {
@@ -78,6 +121,7 @@ a:hover
 {
 	margin: 0px auto;
 	width: 1200px;
+    /*max-height: 1000px;*/
 }
 
 /*********************************************************************************/
@@ -185,7 +229,7 @@ ul.style2 li
 {
 	border-top: solid 1px #E5E5E5;
 	padding: 0.80em 0 0.80em 0;
-	font-family: 0.80em;
+	/*font-family: 0.80em;*/
 }
 
 ul.style2 li:before
@@ -223,7 +267,7 @@ ul.style3 li
 {
 	border-top: solid 1px rgba(255,255,255,.2);
 	padding: 1em 0 1em 0;
-	font-family: 0.80em;
+	/*font-family: 0.80em;*/
 }
 
 ul.style3 li:before

@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
     path('concerts/', views.concert_list, name='concert_list'),
+    path('concerts/<int:year>/<slug:concert_label>/', views.concert_song_list, name='concert_song_list'),
 ]
