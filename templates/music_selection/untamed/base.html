@@ -12,14 +12,17 @@ Released   : 20131220
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 {% load static %}
+{% load react %}
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Music Selection</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="{% static 'untamed/default.css' %}" rel="stylesheet" type="text/css" media="all" />
-<link href="{% static 'untamed/fonts.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Music Selection</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="{% static 'untamed/default.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'untamed/fonts.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <script  type="text/javascript" src={% static "react/js/vendor.js" %}></script>
+    <script  type="text/javascript" src={% static "react/js/index.js" %}></script>
 
 </head>
 <body>
@@ -46,6 +49,7 @@ Released   : 20131220
     <div id="wrapper">
         <div id="page" class="container">
             {% block content %}{% endblock %}
+            {% react_print %}
         </div>
     </div>
     <div id="copyright">
