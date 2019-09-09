@@ -52,37 +52,35 @@ class User(AbstractUser):
         return self.username + " (" + str(self.section) + ")"
 
 
-class VerdictType(models.Model):
-    VERDICT_CHOICES = [
+class ResponseType(models.Model):
+    RESPONSE_CHOICES = [
         ("Yes", "Yes"),
         ("Maybe", "Maybe"),
         ("No", "No"),
         ("N/A", "N/A"),
     ]
-    decision = models.CharField(max_length=10, choices=VERDICT_CHOICES, unique=True)
+    decision = models.CharField(max_length=10, choices=RESPONSE_CHOICES, unique=True)
 
     def __str__(self):
         return self.decision
 
 
-class VerdictReason(models.Model):
-    verdict_type = models.ForeignKey(VerdictType, on_delete=models.CASCADE)
-    short_text = models.CharField(max_length=20, verbose_name="Reason for response (e.g. Fun or un-playable)")
+class Response(models.Model):
+    response_type = models.ForeignKey(ResponseType, on_delete=models.CASCADE)
+    response_reason = models.CharField(max_length=20, verbose_name="Reason for response (e.g. Fun or un-playable)")
 
     def __str__(self):
-        return '%s - %s' % (self.verdict_type, self.short_text)
-
-
-class Verdict(models.Model):
-    response = models.ForeignKey(VerdictType, on_delete=models.CASCADE)
-    short_reason = models.ForeignKey(VerdictReason, on_delete=models.CASCADE)
-    comments = models.CharField(max_length=5000)
+        return '%s - %s' % (self.response_type, self.response_reason)
 
 
 class SongJudgement(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    response = models.ForeignKey(Verdict, on_delete=models.CASCADE)
+    response = models.ForeignKey(Response, on_delete=models.CASCADE)
     song = models.ForeignKey(SongSuggestion, on_delete=models.CASCADE)
+    comments = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return '%s - %s - %s' % (self.song.song_name, self.user.username, self.response.response_type)
 
 
 class Concert(models.Model):

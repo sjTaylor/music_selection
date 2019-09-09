@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import VerdictType, VerdictReason, User, Section, SongSuggestion, Concert
+from .models import ResponseType, Response, User, Section, SongSuggestion, Concert, SongJudgement
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
@@ -16,8 +16,9 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(VerdictType)
-admin.site.register(VerdictReason)
+admin.site.register(ResponseType)
+admin.site.register(Response)
 admin.site.register(Section)
 admin.site.register(SongSuggestion)
 admin.site.register(Concert)
+admin.site.register(SongJudgement)
